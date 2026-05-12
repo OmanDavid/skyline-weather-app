@@ -1,6 +1,6 @@
 # ☁ Weather App
 
-A React weather app powered by Claude AI. Type any city name and get live weather data, fetched by Claude using real-time web search.
+A React weather app .Type any city name and get live weather data, fetched by Claude using real-time web search.
 
 ---
 
