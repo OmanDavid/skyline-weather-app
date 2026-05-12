@@ -1,0 +1,10 @@
+{
+  "cities": [
+    {
+      "id": 1,
+      "name": "Nairobi",
+      "label": "Home",
+      "notes": "Check before morning runs"
+    }
+  ]
+}
