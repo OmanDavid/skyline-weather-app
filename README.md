@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# ☁ Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React weather app powered by Claude AI. Type any city name and get live weather data, fetched by Claude using real-time web search.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## How it works
 
-### `npm start`
+```
+Browser → POST /api/weather → Express server → Anthropic API (Claude + web search) → back to browser
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Express server sits in the middle so your **API key is never exposed to the browser**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Project structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+weather-app/
+├── index.html                  ← Single HTML page that hosts React
+├── vite.config.js              ← Build tool config (proxies /api to Express)
+├── package.json                ← Project dependencies and scripts
+├── .env.example                ← Template for environment variables
+├── .gitignore                  ← Files git should never commit (.env, node_modules)
+│
+├── server/
+│   └── index.js                ← Express backend — calls Anthropic API securely
+│
+└── src/
+    ├── main.jsx                ← Entry point — mounts React into index.html
+    ├── App.jsx                 ← Root component — owns all state
+    ├── index.css               ← Global styles and animation keyframes
+    │
+    ├── components/
+    │   ├── SearchBar.jsx       ← Text input + search button
+    │   ├── WeatherCard.jsx     ← Displays city, temperature, stats
+    │   └── StatusMessage.jsx   ← Idle / loading / error messages
+    │
+    └── utils/
+        └── weatherIcon.js      ← Maps condition strings to emoji icons
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Node.js 18+** — [download here](https://nodejs.org)
+- An **Anthropic API key** — [get one here](https://console.anthropic.com/settings/keys)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Setup (step by step)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1 — Clone or download the project
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone <your-repo-url>
+cd weather-app
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2 — Install dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This downloads all packages listed in `package.json` into a `node_modules/` folder.
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 3 — Create your `.env` file
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copy the example file and add your real API key.
 
-### Code Splitting
+```bash
+cp .env.example .env
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Open `.env` in your editor and replace the placeholder:
 
-### Analyzing the Bundle Size
+```
+ANTHROPIC_API_KEY=sk-ant-your-real-key-here
+PORT=3001
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> ⚠️ Never commit `.env` to git. It's already in `.gitignore`.
 
-### Making a Progressive Web App
+### 4 — Start the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This single command starts both the React frontend and the Express backend at the same time.
 
-### Advanced Configuration
+```bash
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+You should see:
 
-### Deployment
+```
+✅ Weather API server running on http://localhost:3001
+VITE ready on http://localhost:5173
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Open **http://localhost:5173** in your browser.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Available scripts
+
+| Command           | What it does                                    |
+|-------------------|-------------------------------------------------|
+| `npm run dev`     | Starts frontend + backend together (development)|
+| `npm run build`   | Compiles React for production into `/dist`      |
+| `npm run preview` | Previews the production build locally           |
+
+---
+
+## Troubleshooting
+
+**"Could not reach the server"**
+→ Make sure the Express server started. Check the terminal for `✅ Weather API server running`.
+
+**"Failed to reach the AI service"**
+→ Check your `ANTHROPIC_API_KEY` in `.env`. Make sure there are no extra spaces.
+
+**Port already in use**
+→ Change `PORT=3001` in `.env` to another port, e.g. `3002`. Vite's proxy in `vite.config.js` will need to match.
+
+---
+
+## Key concepts (for junior developers)
+
+| Concept | Where to see it |
+|---|---|
+| `useState` hook | `src/App.jsx` |
+| Controlled inputs | `src/components/SearchBar.jsx` |
+| Props & callbacks | `App.jsx` → `SearchBar.jsx` |
+| Async/await fetch | `src/App.jsx` → `fetchWeather()` |
+| Conditional rendering | `src/App.jsx` → JSX return |
+| Pure utility function | `src/utils/weatherIcon.js` |
+| Express route handler | `server/index.js` |
+| Environment variables | `server/index.js` + `.env` |
