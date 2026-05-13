@@ -50,7 +50,7 @@ function WeatherCard({ city, cities, setCities }) {
       <p className="notes">{city.notes}</p>
 
       <div className="button-group">
-        <button onClick={() => navigate(`/city/${city.id}`)}>Edit</button>
+        <button onClick={() => navigate(`/city/${city.id}`)}>View</button>
         <button className="delete-btn" onClick={handleDelete}>Delete</button>
       </div>
     </div>

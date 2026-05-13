@@ -19,11 +19,8 @@ function Dashboard() {
   return (
     <div className="page-container">
       <div className="dashboard-header">
-        <h1>Skyline Weather Dashboard</h1>
-        <p>Track cities and weather conditions in one place.</p>
+        <h1>My Cities</h1>
       </div>
-
-      <SearchBar search={search} setSearch={setSearch} />
 
       <CityList cities={filteredCities} setCities={setCities} />
     </div>
