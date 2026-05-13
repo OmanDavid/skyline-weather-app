@@ -1,4 +1,4 @@
-function NoteForm(notes, setNotes) {
+function NoteForm({notes, setNotes}) {
     return (
             <
             textarea
