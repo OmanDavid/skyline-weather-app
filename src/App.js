@@ -3,9 +3,8 @@ import Dashboard from './pages/Dashboard';
 import AddCity from './pages/AddCity';
 import CityDetail from './pages/CityDetail';
 import Navbar from './components/Navbar';
-import NoteForm from './components/NoteForm';
 import './App.css';
-import SearchBar from './components/SearchBar';
+
 
 function App() {
   return (
