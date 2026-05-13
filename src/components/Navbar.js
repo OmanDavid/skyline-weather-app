@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom';
 // Navbar component - appears on every page
 function Navbar() {
   return (
-    <nav>
-      {/* App logo/name - links to dashboard */}
-      <Link to="/">Skyline</Link>
+    <nav classname ="navbar">
+      <h2 classname="logo">Skyline</h2>
 
-      {/* Navigation links */}
-      <ul>
+      <div classname="nav-link">
         <li><Link to="/">Dashboard</Link></li>
         <li><Link to="/add">Add City</Link></li>
-      </ul>
+        </div>
     </nav>
   );
 }
