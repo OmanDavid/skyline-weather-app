@@ -2,12 +2,6 @@
 
 A React weather app .Type any city name and get live weather data real-time web search.
 
----
-
-## How it works
-
-```
-Browser → POST /api/weather → Express server → Anthropic API (Claude + web search) → back to browser
 ```
 
 The Express server sits in the middle so your **API key is never exposed to the browser**.
