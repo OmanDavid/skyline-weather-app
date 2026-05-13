@@ -1,37 +1,39 @@
 import { useNavigate } from 'react-router-dom';
 
-// WeatherCard component - displays weather info for one city
-// also handles the delete functionality
 function WeatherCard({ city, cities, setCities }) {
-  // useNavigate lets us redirect to another page programmatically
   const navigate = useNavigate();
 
-  // Delete function - removes city from json-server and updates state
   function handleDelete() {
     fetch(`http://localhost:5000/cities/${city.id}`, {
       method: 'DELETE'
-    })
-      .then(() => {
-        // filter out the deleted city from the cities array
-        const updated = cities.filter(c => c.id !== city.id);
-        setCities(updated);
-      });
+    }).then(() => {
+      const updated = cities.filter((c) => c.id !== city.id);
+      setCities(updated);
+    });
   }
 
   return (
-    <div>
-      {/* city name */}
-      <h2>{city.name}</h2>
+    <div className="weather-card">
+      <div>
+        <h2>{city.name}</h2>
+        <p>{city.country}</p>
+      </div>
 
-      {/* temperature and condition will come from the weather API later */}
-      <p>Label: {city.label}</p>
-      <p>Notes: {city.notes}</p>
+      <div className="weather-details">
+        <span>{city.temperature}°C</span>
+        <p>{city.label}</p>
+      </div>
 
-      {/* clicking Edit navigates to the city detail page */}
-      <button onClick={() => navigate(`/city/${city.id}`)}>Edit</button>
+      <p className="notes">{city.notes}</p>
 
-      {/* clicking Delete removes the city */}
-      <button onClick={handleDelete}>Delete</button>
+      <div className="button-group">
+        <button onClick={() => navigate(`/city/${city.id}`)}>
+          Edit
+        </button>
+        <button className="delete-btn" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
