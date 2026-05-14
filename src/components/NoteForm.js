@@ -1,7 +1,6 @@
 function NoteForm({notes, setNotes}) {
     return (
-            <
-            textarea
+        <textarea
             value = {notes}
             onChange = {e => setNotes(e.target.value)}
             placeholder = "Write your notes here..."
