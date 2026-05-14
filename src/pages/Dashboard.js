@@ -1,11 +1,8 @@
-
-import { useEffect, useState } from 'react';
-import WeatherCard from '../components/WeatherCard';
-
-const cities = ['Nairobi', 'London', 'Tokyo', 'New York'];
+import { useState, useEffect } from 'react';
+import CityList from '../components/CityList';
 
 function Dashboard() {
-  const [weatherData, setWeatherData] = useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -16,28 +13,6 @@ function Dashboard() {
               `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
             );
 
-            const data = await response.json();
-
-            return {
-              name: data.name,
-              country: data.sys.country,
-              temp: data.main.temp,
-              condition: data.weather[0].main,
-              humidity: data.main.humidity,
-              wind: data.wind.speed
-            };
-          })
-        );
-
-        setWeatherData(responses);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchWeather();
-  }, []);
-
   return (
     <div className="page-container">
       <div className="hero-card">
@@ -47,11 +22,7 @@ function Dashboard() {
         </p>
       </div>
 
-      <div className="weather-grid">
-        {weatherData.map((city) => (
-          <WeatherCard key={city.name} city={city} />
-        ))}
-      </div>
+      <CityList cities={cities} setCities={setCities} />
     </div>
   );
 }
