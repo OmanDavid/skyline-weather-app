@@ -6,8 +6,8 @@ function AddCity() {
   const [search, setSearch] = useState('');
   const [result, setResult] = useState(null);
 
-  // fetch weather from OpenWeatherMap when Search is clicked
   function handleSearch() {
+    if (!search) return;
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
     )
@@ -26,7 +26,6 @@ function AddCity() {
       });
   }
 
-  // POST the city to json-server when Save City is clicked
   function handleSave() {
     fetch('http://localhost:5000/cities', {
       method: 'POST',
@@ -46,7 +45,6 @@ function AddCity() {
     <div className="page-container">
       <h1>Add To My Cities</h1>
 
-      {/* search bar */}
       <div className="search-container">
         <input
           type="text"
@@ -54,13 +52,12 @@ function AddCity() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           onKeyDown={e => {
-            if (e.key === "Enter") handleSearch();
+            if (e.key === 'Enter') handleSearch();
           }}
         />
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {/* result card - only shows after a successful search */}
       {result && (
         <div className="result-card">
           <div>
