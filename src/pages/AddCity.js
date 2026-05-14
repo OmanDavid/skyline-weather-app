@@ -53,6 +53,9 @@ function AddCity() {
           placeholder="Search for a city..."
           value={search}
           onChange={e => setSearch(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === "Enter") handleSearch();
+          }}
         />
         <button onClick={handleSearch}>Search</button>
       </div>

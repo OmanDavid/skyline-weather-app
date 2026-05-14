@@ -1,10 +1,32 @@
 {
   "cities": [
     {
-      "id": "1",
+      "name": "Juba",
+      "country": "SS",
+      "label": "",
+      "notes": "Capital of South Sudan\n",
+      "id": "dcvz_iriY3c"
+    },
+    {
+      "name": "London",
+      "country": "GB",
+      "label": "",
+      "notes": "",
+      "id": "g8Pc0cE8OQ8"
+    },
+    {
       "name": "Nairobi",
-      "temperature": 24,
-      "condition": "Sunny"
+      "country": "KE",
+      "label": "",
+      "notes": "",
+      "id": "NJWDXR9vDXQ"
+    },
+    {
+      "name": "Mombasa",
+      "country": "KE",
+      "label": "",
+      "notes": "",
+      "id": "aHlbJTF0lF8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import CityList from '../components/CityList';
-import SearchBar from '../components/SearchBar';
 
 function Dashboard() {
   const [cities, setCities] = useState([]);
-  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:5000/cities')
@@ -12,17 +10,13 @@ function Dashboard() {
       .then(data => setCities(data));
   }, []);
 
-  const filteredCities = cities.filter((city) =>
-    city.name.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <div className="page-container">
       <div className="dashboard-header">
         <h1>My Cities</h1>
       </div>
 
-      <CityList cities={filteredCities} setCities={setCities} />
+      <CityList cities={cities} setCities={setCities} />
     </div>
   );
 }
