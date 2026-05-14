@@ -55,7 +55,7 @@ function AddCity() {
 
   return (
     <div className="page-container">
-      <h1>Add To My Cities</h1>
+      <h1 className="add-city-title">Add To My Cities</h1>
 
       <div className="search-container">
         <input

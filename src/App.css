@@ -1,0 +1,344 @@
+/* ===== GLOBAL RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E293B;
+  padding: 0 40px;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  color: #38BDF8;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+
+.navbar-links a {
+  color: #F8FAFC;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar-links a:hover {
+  color: #38BDF8;
+}
+
+/* ===== PAGE CONTAINER ===== */
+.page-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard-header h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+/* ===== WEATHER CARDS GRID ===== */
+.weather-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.weather-card {
+  flex: 1 1 280px;
+  max-width: 350px;
+}
+
+.weather-card {
+  background-color: #1E293B;
+  border-radius: 16px;
+  padding: 24px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weather-card h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #F8FAFC;
+}
+
+.weather-card p {
+  color: #94A3B8;
+  font-size: 14px;
+}
+
+.weather-details span {
+  font-size: 36px;
+  font-weight: bold;
+  color: #38BDF8;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.button-group button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.view-btn {
+  background-color: #38BDF8 !important;
+  color: #0F172A !important;
+}
+
+.delete-btn {
+  background-color: #EF4444 !important;
+  color: #F8FAFC !important;
+}
+
+/* ===== ADD CITY PAGE ===== */
+.search-container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.search-container input {
+  width: min(500px, 100%);
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1E293B;
+  color: #F8FAFC;
+  font-size: 16px;
+}
+
+.search-container input::placeholder {
+  color: #94A3B8;
+}
+
+.search-container button {
+  padding: 14px 28px;
+  background-color: #38BDF8;
+  color: #0F172A;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result-card {
+  background-color: #1E293B;
+  border-radius: 16px;
+  padding: 24px;
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-card h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.result-card .temp {
+  font-size: 32px;
+  font-weight: bold;
+  color: #38BDF8;
+}
+
+.result-card button {
+  padding: 10px 20px;
+  background-color: #38BDF8;
+  color: #0F172A;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #EF4444;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ===== CITY DETAIL PAGE ===== */
+.city-detail {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.city-detail h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.temperature {
+  font-size: 64px;
+  font-weight: bold;
+  color: #38BDF8;
+  margin-bottom: 4px;
+}
+
+.condition {
+  color: #94A3B8;
+  font-size: 20px;
+  margin-bottom: 32px;
+}
+
+.detail-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.detail-card {
+  background-color: #1E293B;
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  text-align: center;
+}
+
+.detail-card p {
+  color: #94A3B8;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.detail-card h3 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #F8FAFC;
+}
+
+/* ===== NOTES SECTION ===== */
+.notes-section h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.notes-section textarea {
+  width: 600px;
+  background-color: #1E293B;
+  color: #F8FAFC;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14px;
+  resize: vertical;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.notes-section textarea::placeholder {
+  color: #94A3B8;
+}
+
+.notes-section button {
+  padding: 12px 24px;
+  background-color: #38BDF8;
+  color: #0F172A;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+    height: 60px;
+  }
+
+  .navbar-links {
+    gap: 16px;
+  }
+
+  .page-container {
+    padding: 20px;
+  }
+
+  .weather-grid {
+    flex-direction: column;
+  }
+
+  .weather-card {
+    width: 100%;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
+  .result-card {
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .detail-cards {
+    flex-direction: column;
+  }
+
+  .notes-section textarea {
+    width: 100%;
+  }
+
+  .temperature {
+    font-size: 48px;
+  }
+}
+
+/* ===== ADD CITY PAGE TITLE ===== */
+.add-city-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
