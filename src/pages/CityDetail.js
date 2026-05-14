@@ -1,91 +1,74 @@
-import { useState, useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function CityDetail() {
-  const { id } = useParams();
-
-  const [city, setCity] = useState(null);
+  const { name } = useParams();
   const [weather, setWeather] = useState(null);
-  const [notes, setNotes] = useState('');
 
-  // fetch city from json-server
   useEffect(() => {
-    fetch(`http://localhost:5000/cities/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setCity(data);
-        setNotes(data.notes || '');
-      });
-  }, [id]);
+    const fetchCityWeather = async () => {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
+        );
 
-  // fetch live weather once city name is available
-  useEffect(() => {
-    if (city?.name) {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
-      )
-        .then(res => res.json())
-        .then(data => {
-          if (data.cod === 200) {
-            setWeather({
-              temp: data.main.temp,
-              condition: data.weather[0].description,
-              humidity: data.main.humidity,
-              wind: data.wind.speed,
-              feelsLike: data.main.feels_like
-            });
-          }
-        });
-    }
-  }, [city]);
+        const data = await response.json();
 
-  // save notes via PATCH to json-server
-  function handleSaveNotes() {
-    fetch(`http://localhost:5000/cities/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ notes })
-    }).then(() => alert('Notes saved!'));
+        setWeather(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCityWeather();
+  }, [name]);
+
+  if (!weather || !weather.main) {
+    return (
+      <div className="page-container">
+        <div className="hero-card">
+          <h1>Loading...</h1>
+        </div>
+      </div>
+    );
   }
 
-  if (!city) return <p>Loading...</p>;
-
   return (
-    <div className="city-detail">
-      <h1>{city.name}</h1>
-      {weather ? (
-        <>
-          <h2 className="temperature">{weather.temp}°C</h2>
-          <p className="condition">{weather.condition}</p>
+    <div className="page-container">
+      <div className="hero-card">
+        <h1>{weather.name}</h1>
+        <p>{weather.weather[0].description}</p>
 
-          <div className="detail-cards">
-            <div className="detail-card">
-              <p>Humidity</p>
-              <h3>{weather.humidity}%</h3>
-            </div>
-            <div className="detail-card">
-              <p>Wind</p>
-              <h3>{weather.wind} km/h</h3>
-            </div>
-            <div className="detail-card">
-              <p>Feels Like</p>
-              <h3>{weather.feelsLike}°C</h3>
-            </div>
+        <div className="weather-temp">
+          {Math.round(weather.main.temp)}°C
+        </div>
+      </div>
+
+      <div className="detail-card">
+        <h2>Weather Details</h2>
+
+        <div className="detail-grid">
+          <div className="metric">
+            <h4>Humidity</h4>
+            <p>{weather.main.humidity}%</p>
           </div>
-        </>
-      ) : (
-        <p>Loading weather...</p>
-      )}
 
-      <div className="notes-section">
-        <h3>Personal Notes</h3>
-        <textarea
-          value={notes}
-          onChange={e => setNotes(e.target.value)}
-          placeholder="Add your notes here..."
-          rows="6"
-        />
-        <button onClick={handleSaveNotes}>Save Notes</button>
+          <div className="metric">
+            <h4>Wind Speed</h4>
+            <p>{weather.wind.speed} km/h</p>
+          </div>
+
+          <div className="metric">
+            <h4>Feels Like</h4>
+            <p>{Math.round(weather.main.feels_like)}°C</p>
+          </div>
+
+          <div className="metric">
+            <h4>Pressure</h4>
+            <p>{weather.main.pressure} hPa</p>
+          </div>
+        </div>
       </div>
     </div>
   );
