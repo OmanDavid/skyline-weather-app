@@ -1,10 +1,46 @@
 {
   "cities": [
     {
-      "id": "1",
+      "name": "Spain",
+      "country": "ES",
+      "label": "",
+      "notes": "this is spain\n",
+      "id": "MO5QugCeb_o"
+    },
+    {
+      "name": "Juba",
+      "country": "SS",
+      "label": "",
+      "notes": "",
+      "id": "oYgw4W3m3Uo"
+    },
+    {
+      "name": "New York",
+      "country": "US",
+      "label": "",
+      "notes": "",
+      "id": "dqnVyaN-7cY"
+    },
+    {
       "name": "Nairobi",
-      "temperature": 24,
-      "condition": "Sunny"
+      "country": "KE",
+      "label": "",
+      "notes": "",
+      "id": "7J3e1dy5GpQ"
+    },
+    {
+      "name": "Dubai",
+      "country": "AE",
+      "label": "",
+      "notes": "",
+      "id": "xxLJ9FIXe14"
+    },
+    {
+      "name": "New Jersey",
+      "country": "US",
+      "label": "",
+      "notes": "",
+      "id": "jUFhE6jRvx0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

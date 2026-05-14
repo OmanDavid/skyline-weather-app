@@ -8,6 +8,9 @@ function CityDetail() {
   const [weather, setWeather] = useState(null);
   const [notes, setNotes] = useState('');
 
+  // tracks if weather fetch failed
+  const [error, setError] = useState(false);
+
   // fetch city from json-server
   useEffect(() => {
     fetch(`http://localhost:5000/cities/${id}`)
@@ -26,6 +29,7 @@ function CityDetail() {
       )
         .then(res => res.json())
         .then(data => {
+          // only set weather if response is successful
           if (data.cod === 200) {
             setWeather({
               temp: data.main.temp,
@@ -34,8 +38,13 @@ function CityDetail() {
               wind: data.wind.speed,
               feelsLike: data.main.feels_like
             });
+          } else {
+            // API returned an error
+            setError(true);
           }
-        });
+        })
+        // network or connection error
+        .catch(() => setError(true));
     }
   }, [city]);
 
@@ -48,12 +57,17 @@ function CityDetail() {
     }).then(() => alert('Notes saved!'));
   }
 
+  // show loading while city is being fetched
   if (!city) return <p>Loading...</p>;
 
   return (
     <div className="city-detail">
       <h1>{city.name}</h1>
-      {weather ? (
+
+      {/* show weather, error or loading */}
+      {error ? (
+        <p>Weather unavailable</p>
+      ) : weather ? (
         <>
           <h2 className="temperature">{weather.temp}°C</h2>
           <p className="condition">{weather.condition}</p>
@@ -77,6 +91,7 @@ function CityDetail() {
         <p>Loading weather...</p>
       )}
 
+      {/* personal notes section */}
       <div className="notes-section">
         <h3>Personal Notes</h3>
         <textarea

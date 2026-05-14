@@ -5,9 +5,19 @@ function AddCity() {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // fetch weather from OpenWeatherMap when Search is clicked
   function handleSearch() {
+    if (!search.trim()) {
+      setError('Please enter a city name.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setResult(null);
+
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
     )
@@ -21,12 +31,13 @@ function AddCity() {
             condition: data.weather[0].description
           });
         } else {
-          alert('City not found. Try again.');
+          setError('City not found. Please try again.');
         }
-      });
+      })
+      .catch(() => setError('Something went wrong. Check your connection.'))
+      .finally(() => setLoading(false));
   }
 
-  // POST the city to json-server when Save City is clicked
   function handleSave() {
     fetch('http://localhost:5000/cities', {
       method: 'POST',
@@ -44,20 +55,27 @@ function AddCity() {
 
   return (
     <div className="page-container">
-      <h1>Add To My Cities</h1>
+      <h1 className="add-city-title">Add To My Cities</h1>
 
-      {/* search bar */}
       <div className="search-container">
         <input
           type="text"
           placeholder="Search for a city..."
           value={search}
           onChange={e => setSearch(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') handleSearch();
+          }}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} disabled={loading}>
+          {loading ? 'Searching...' : 'Search'}
+        </button>
       </div>
 
-      {/* result card - only shows after a successful search */}
+      {/* error message */}
+      {error && <p className="error-message">{error}</p>}
+
+      {/* result card */}
       {result && (
         <div className="result-card">
           <div>
