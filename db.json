@@ -20,27 +20,6 @@
       "label": "",
       "notes": "",
       "id": "dqnVyaN-7cY"
-    },
-    {
-      "name": "Nairobi",
-      "country": "KE",
-      "label": "",
-      "notes": "",
-      "id": "7J3e1dy5GpQ"
-    },
-    {
-      "name": "Dubai",
-      "country": "AE",
-      "label": "",
-      "notes": "",
-      "id": "xxLJ9FIXe14"
-    },
-    {
-      "name": "New Jersey",
-      "country": "US",
-      "label": "",
-      "notes": "",
-      "id": "jUFhE6jRvx0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
