@@ -1,32 +1,39 @@
 {
   "cities": [
     {
+      "name": "Spain",
+      "country": "ES",
+      "label": "",
+      "notes": "",
+      "id": "MO5QugCeb_o"
+    },
+    {
       "name": "Juba",
       "country": "SS",
       "label": "",
-      "notes": "Capital of South Sudan\n",
-      "id": "dcvz_iriY3c"
+      "notes": "",
+      "id": "oYgw4W3m3Uo"
     },
     {
-      "name": "London",
-      "country": "GB",
+      "name": "New York",
+      "country": "US",
       "label": "",
       "notes": "",
-      "id": "g8Pc0cE8OQ8"
+      "id": "dqnVyaN-7cY"
     },
     {
       "name": "Nairobi",
       "country": "KE",
       "label": "",
       "notes": "",
-      "id": "NJWDXR9vDXQ"
+      "id": "7J3e1dy5GpQ"
     },
     {
-      "name": "Mombasa",
-      "country": "KE",
+      "name": "Dubai",
+      "country": "AE",
       "label": "",
       "notes": "",
-      "id": "aHlbJTF0lF8"
+      "id": "52tFiYAD5lg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
