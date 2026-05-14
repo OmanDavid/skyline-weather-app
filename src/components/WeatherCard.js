@@ -1,4 +1,36 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function WeatherCard({ city, cities, setCities }) {
+  const navigate = useNavigate();
+
+  // state to hold live weather data from OpenWeatherMap
+  const [weather, setWeather] = useState(null);
+
+  // fetch weather when the card loads using the city name
+  useEffect(() => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
+    )
+      .then(res => res.json())
+      .then(data => {
+        // store temperature and weather condition
+        setWeather({
+          temp: data.main.temp,
+          condition: data.weather[0].description
+        });
+      })
+      .catch(err => console.log('Weather fetch error:', err));
+  }, [city.name]);
+
+  function handleDelete() {
+    fetch(`http://localhost:5000/cities/${city.id}`, {
+      method: 'DELETE'
+    }).then(() => {
+      const updated = cities.filter(c => c.id !== city.id);
+      setCities(updated);
+    });
+  }
 
   // converts country code to full country name
   function getCountryName(code) {
@@ -10,20 +42,27 @@ import { Link } from 'react-router-dom';
   }
 
   return (
-    <Link to={`/city/${city.name}`} className="weather-card">
+    <div className="weather-card">
       <h2>{city.name}</h2>
       <p>{getCountryName(city.country)}</p>
 
-      <div className="weather-temp">
-        {Math.round(city.temp)}°C
-      </div>
+      {/* show live weather if available, otherwise show loading */}
+      {weather ? (
+        <div className="weather-details">
+          <span>{weather.temp}°C</span>
+          <p>{weather.condition}</p>
+        </div>
+      ) : (
+        <p>Loading weather...</p>
+      )}
 
-      <div className="weather-meta">
-        <p>Condition: {city.condition}</p>
-        <p>Humidity: {city.humidity}%</p>
-        <p>Wind: {city.wind} km/h</p>
+      <p className="notes">{city.notes}</p>
+
+      <div className="button-group">
+        <button onClick={() => navigate(`/city/${city.id}`)}>View</button>
+        <button className="delete-btn" onClick={handleDelete}>Delete</button>
       </div>
-    </Link>
+    </div>
   );
 }
 
