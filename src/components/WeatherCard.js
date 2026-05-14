@@ -32,10 +32,19 @@ function WeatherCard({ city, cities, setCities }) {
     });
   }
 
+  // converts country code to full country name
+  function getCountryName(code) {
+    try {
+      return new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
+    } catch {
+      return code; // fallback to code if conversion fails
+    }
+  }
+
   return (
     <div className="weather-card">
       <h2>{city.name}</h2>
-      <p>{city.country}</p>
+      <p>{getCountryName(city.country)}</p>
 
       {/* show live weather if available, otherwise show loading */}
       {weather ? (

@@ -1,18 +1,39 @@
 {
   "cities": [
     {
-      "id": "1",
-      "name": "Nairobi",
-      "temperature": 24,
-      "condition": "Sunny",
-      "notes": "capital of kenya\n"
-    },
-    {
       "name": "Spain",
       "country": "ES",
       "label": "",
       "notes": "",
       "id": "MO5QugCeb_o"
+    },
+    {
+      "name": "Juba",
+      "country": "SS",
+      "label": "",
+      "notes": "",
+      "id": "oYgw4W3m3Uo"
+    },
+    {
+      "name": "New York",
+      "country": "US",
+      "label": "",
+      "notes": "",
+      "id": "dqnVyaN-7cY"
+    },
+    {
+      "name": "Nairobi",
+      "country": "KE",
+      "label": "",
+      "notes": "",
+      "id": "7J3e1dy5GpQ"
+    },
+    {
+      "name": "Dubai",
+      "country": "AE",
+      "label": "",
+      "notes": "",
+      "id": "52tFiYAD5lg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
