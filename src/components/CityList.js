@@ -8,7 +8,7 @@ function CityList({ cities, setCities }) {
   }
 
   return (
-    <div>
+    <div className="weather-grid">
       {/* loop through each city and render a WeatherCard */}
       {cities.map(city => (
         <WeatherCard

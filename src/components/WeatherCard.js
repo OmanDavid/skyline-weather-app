@@ -69,7 +69,7 @@ function WeatherCard({ city, cities, setCities }) {
       )}
 
       <div className="button-group">
-        <button onClick={() => navigate(`/city/${city.id}`)}>View</button>
+        <button className="view-btn" onClick={() => navigate(`/city/${city.id}`)}>View</button>
         <button className="delete-btn" onClick={handleDelete}>Delete</button>
       </div>
     </div>
