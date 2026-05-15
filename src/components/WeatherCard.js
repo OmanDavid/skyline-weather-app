@@ -20,7 +20,7 @@ function WeatherCard({ city, cities, setCities }) {
         // only set weather if response is successful
         if (data.cod === 200) {
           setWeather({
-            temp: data.main.temp,
+            temp: Math.round(data.main.temp),
             condition: data.weather[0].description
           });
         } else {
@@ -61,7 +61,7 @@ function WeatherCard({ city, cities, setCities }) {
         <p>Weather unavailable</p>
       ) : weather ? (
         <div className="weather-details">
-          <span>{weather.temp}°C</span>
+          <span>{Math.round(weather.temp)}°C</span>
           <p>{weather.condition}</p>
         </div>
       ) : (
