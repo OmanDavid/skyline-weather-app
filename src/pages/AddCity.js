@@ -27,7 +27,7 @@ function AddCity() {
           setResult({
             name: data.name,
             country: data.sys.country,
-            temp: data.main.temp,
+            temp: Math.round(data.main.temp),
             condition: data.weather[0].description
           });
         } else {
@@ -80,7 +80,7 @@ function AddCity() {
         <div className="result-card">
           <div>
             <h2>{result.name}</h2>
-            <p className="temp">{result.temp}°C</p>
+            <p className="temp">{Math.round(result.temp)}°C</p>
             <p>{result.condition}</p>
           </div>
           <button onClick={handleSave}>Save City</button>

@@ -32,11 +32,11 @@ function CityDetail() {
           // only set weather if response is successful
           if (data.cod === 200) {
             setWeather({
-              temp: data.main.temp,
+              temp: Math.round(data.main.temp),
               condition: data.weather[0].description,
               humidity: data.main.humidity,
               wind: data.wind.speed,
-              feelsLike: data.main.feels_like
+              feelsLike: Math.round(data.main.feels_like)
             });
           } else {
             // API returned an error
@@ -69,7 +69,7 @@ function CityDetail() {
         <p>Weather unavailable</p>
       ) : weather ? (
         <>
-          <h2 className="temperature">{weather.temp}°C</h2>
+          <h2 className="temperature">{Math.round(weather.temp)}°C</h2>
           <p className="condition">{weather.condition}</p>
 
           <div className="detail-cards">
