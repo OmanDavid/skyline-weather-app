@@ -22,25 +22,11 @@
       "id": "dqnVyaN-7cY"
     },
     {
-      "name": "Kigali",
-      "country": "RW",
+      "name": "Vatican City",
+      "country": "VA",
       "label": "",
       "notes": "",
-      "id": "tm83ZNy1GMY"
-    },
-    {
-      "name": "Mombasa",
-      "country": "KE",
-      "label": "",
-      "notes": "",
-      "id": "mvmaygSKzks"
-    },
-    {
-      "name": "Nairobi",
-      "country": "KE",
-      "label": "",
-      "notes": "",
-      "id": "zVvr_C_Q_e0"
+      "id": "YH6Bi5Ze9N8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
